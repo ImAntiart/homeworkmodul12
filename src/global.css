@@ -1,44 +1,73 @@
 body {
-  color: #fff;
-  background: #17181c;
-  font-family: sans-serif;
+    color: #fff;
+    background: #17181c;
+    font-family: sans-serif;
 }
 
+/* Базовый стиль */
 header {
-  padding: 10px 30px;
+    padding: 10px 30px;
 }
 
 header h1 {
-  font-size: 40px;
-  font-weight: 800;
+    font-size: 2rem;
 }
 
-footer {
-  height: 100px;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -moz-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+/* Медиа-запросы для адаптивного дизайна */
+@media screen and (min-width: 320px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sources {
+        margin-bottom: 20px;
+    }
+
+    .news {
+        flex-grow: 1;
+    }
 }
-footer .copyright {
-  font-size: 14px;
-  color: #333;
-  text-align: center;
+
+@media screen and (min-width: 768px) {
+    header h1 {
+        font-size: 3rem;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 20px;
+    }
+
+    .sources {
+        grid-column: 1 / -1;
+        justify-content: center;
+    }
+
+    .news {
+        grid-column: 2;
+    }
 }
-footer .copyright a {
-  color: #444;
-}
-footer .copyright a:hover {
-  color: #555;
-}
-footer .copyright:before {
-  content: '©';
+
+@media screen and (min-width: 1024px) {
+    header h1 {
+        font-size: 4rem;
+    }
+
+    main {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .sources {
+        grid-column: 1 / 3;
+    }
+
+    .news {
+        grid-column: 3;
+    }
 }
