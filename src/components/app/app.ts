@@ -1,33 +1,25 @@
 import AppController from '../controller/controller';
+import { DataForNews, DataForSource } from '../interfaces/TResponsePortal';
 import { AppView } from '../view/appView';
 
-// Определяем интерфейсы для контроллера и представления
-interface AppControllerInterface {
-    getNews(event: Event, callback: (data: unknown) => void): void;
-    getSources(callback: (data: unknown) => void): void;
-}
-
-interface AppViewInterface {
-    drawNews(data: unknown): void;
-    drawSources(data: unknown): void;
-}
-
-// Определяем класс App с использованием интерфейсов
 class App {
-    private controller: AppControllerInterface;
-    private view: AppViewInterface;
-
+    controller: AppController;
+    view: AppView;
     constructor() {
         this.controller = new AppController();
         this.view = new AppView();
     }
 
-    start(): void {
-        document
-            .querySelector('.sources')
-            .addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
-
-        this.controller.getSources((data) => this.view.drawSources(data));
+    start() {
+        const element = document.querySelector('.sources');
+        if (typeof element != 'undefined' && element != null) {
+            element.addEventListener('click', (e) =>
+                this.controller.getNews(e, <T>(data: T): void => {
+                    this.view.drawNews(data as DataForNews);
+                })
+            );
+            this.controller.getSources(<T>(data: T): void => this.view.drawSources(data as DataForSource));
+        }
     }
 }
 
